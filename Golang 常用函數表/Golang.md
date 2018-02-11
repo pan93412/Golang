@@ -33,7 +33,7 @@
   - 檔案執行： exec
     - Command
       - 用法： [程式檔名, 參數]
-      - 例如： Command("dir", "/s")
+      - 例如： `Command("dir", "/s")`
     - Run
       - 程式會等待至執行完成。
     - Start
@@ -41,28 +41,28 @@
   - math
     - 亂數產生： Rand
       - Seed(種子)
-        - Seed(time.Now().Unix())
+        - `Seed(time.Now().Unix())`
       - Intn
         - max = 欲最大值；min = 欲最小值
-        - Intn(max - min) + min
+        - `Intn(max - min) + min`
     - 根號： Sqrt
   - time
     - Now()
       - Unix() (時間戳)
     - Sleep()
-      - Sleep(second * time.Second)
+      - `Sleep(second * time.Second)`
     - time.Second
     - time.Minute
     - time.Hour
   - panic() (程式結束)
   - func
-    - func (函數名稱) (輸入) (輸出) {}
+    - `func (函數名稱) (輸入) (輸出) {}`
   - for
-    - for {} (無限迴圈)
-    - for i<100 {} (while)
-    - for i := 0; i<100; i++ {} (for)
+    - `for {}` (無限迴圈)
+    - `for i<100 {}` (while)
+    - `for i := 0; i<100; i++ {}` (for)
   - if
-    - if (什麼) {(做)} else {(做)}
+    - `if (什麼) {(做)} else {(做)}`
     - switch
       - case
       - default
@@ -95,14 +95,14 @@
     - float(32, 64)
     - bool
     - array
-      - (Array 名稱)[(項目數量)](類型){(項目)}
+      - `(Array 名稱)[(項目數量)](類型){(項目)}`
     - slice
-      - make([](類型), 項目數量, 項目最大長度)
+      - `make([](類型), 項目數量, 項目最大長度)`
     - map
-      - make(map[](類型))
+      - `make(map[](類型))`
         - {'A': {'b', 'c'}, 'B'}
     - struct
-      - type (名稱) struct {}
+      - `type (名稱) struct {}`
     - interface
     - error
       - 範例程序
