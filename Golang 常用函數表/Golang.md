@@ -1,4 +1,4 @@
-# Golang 常用函數表
+﻿# Golang 常用函數表
 ## 函數類
 - fmt
   - 輸出文字類
@@ -13,6 +13,11 @@
     - Sprint
     - Sprintln
     - Scanf
+- log
+  - 與 fmt 比較： log 會在文字前端增加時間。
+  - Print
+  - Println
+  - Printf
 - os
   - 資料夾
     - Chdir
