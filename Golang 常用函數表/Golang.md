@@ -59,6 +59,12 @@
     - time.Second
     - time.Minute
     - time.Hour
+  - flag
+    - flag.[Type]()
+      - [Type] 可以是 int, string, float32, float64, bool 等等
+    - flag.[Type]var()
+    - flag.Parse()
+    - 使用方法可參閱 Golang 補充資料。
   - panic() (程式結束)
   - func
     - `func (函數名稱) (輸入) (輸出) {}`
