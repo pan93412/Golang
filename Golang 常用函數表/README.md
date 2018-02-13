@@ -125,7 +125,7 @@
           return fmt.Springln("喔喔！程式壞了。原因：", e.string)
       }
       func ProgramErr error{
-          return &theError{'沒有原因'}
+          return &theError{"沒有原因"}
       }
       func main() {
           panic(ProgramErr)
