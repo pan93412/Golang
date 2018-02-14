@@ -13,6 +13,13 @@
     - Sprint
     - Sprintln
     - Scanf
+- strings
+  - Replace
+    - (原文字常數/變數), 欲替換文字, 替換文字, 替換次數
+    - 範例程式請參考 Golang 補充資料。
+  - Split
+    - (原文字常數/變數), 切割處
+    - 範例程式請參考 Golang 補充資料。
 - log
   - 與 fmt 比較： log 會在文字前端增加時間。
   - Print

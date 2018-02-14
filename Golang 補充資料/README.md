@@ -158,6 +158,33 @@ if *flag1 == True {
 }
 fmt.Printf("執行次數： %v 次\n", *count) // 注意！ flag 得到的值要用 Pointer 讀取。
 ```
+### strings 的使用
+#### Replace
+- 使用方法： strings.Replace(原文字常數/變數, 欲替換文字, 替換文字, 替換次數)
+- 範例：
+```
+package main
+import ("fmt"; "strings")
+func main() {
+  const originalText string = "byStarTW is byStarTW's friend"
+  // 解釋： 替換 originalText 中的 1 個 byStarTW 為 yami_odymel
+  newText := strings.Replace(originalText, byStarTW, yami_odymel, 1)
+  fmt.Println(newText) // 結果： "yami_odymel is byStarTW's friend"
+}
+```
+### Split
+- 使用方法： strings.Split(原文字常數/變數, 切割處)
+- 範例：
+```
+package main
+import "strings"
+func main() {
+  const orText string = "num1 num2 num3"
+  // 解釋： 把 orText 中的每一個空白作為一個分割
+  result := strings.Split(orText, " ")
+  // 結果： ["num1", "num2", "num3"]
+}
+```
 ## Authors
 作者： byStarTW
 
