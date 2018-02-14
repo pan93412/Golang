@@ -2,77 +2,77 @@
 ## 函數類
 - fmt
   - 輸出文字類
-    - Print
-    - Println
-    - Printf
+    - `Print()`
+    - `Println()`
+    - `Printf()`
   - 輸入文字類
-    - Scan
-    - Scanln
-    - Scanf
+    - `Scan()`
+    - `Scanln()`
+    - `Scanf()`
   - 轉換文字類
-    - Sprint
-    - Sprintln
-    - Scanf
+    - `Sprint()`
+    - `Sprintln()`
+    - `Scanf()`
 - strings
-  - Replace
+  - `Replace()`
     - (原文字常數/變數), 欲替換文字, 替換文字, 替換次數
     - 範例程式請參考 Golang 補充資料。
-  - Split
+  - `Split()`
     - (原文字常數/變數), 切割處
     - 範例程式請參考 Golang 補充資料。
 - log
   - 與 fmt 比較： log 會在文字前端增加時間。
-  - Print
-  - Println
-  - Printf
+  - `Print()`
+  - `Println()`
+  - `Printf()`
 - os
   - 資料夾
-    - Chdir
-    - Mkdir
+    - `Chdir()`
+    - `Mkdir()`
   - 刪除、更名操作
-    - Remove
+    - `Remove()`
       僅移除檔案
-    - RemoveAll
+    - `RemoveAll()`
       移除目錄下所有檔案
-    - Rename
+    - `Rename()`
   - 檔案資訊
-    - Stat
-      - 用法： Stat [檔案資訊, err]
-        - 檔案資訊.IsDir()
+    - `Stat()`
+      - 用法： `檔案資訊, err := os.Stat(檔案)`
+        - `檔案資訊.IsDir()`
         - 該物件是不是資料夾？
           不是就是檔案，
           可使用 true / false 判斷。
-  - 檔案執行： exec
+  - 檔案執行： `exec`
     - Command
       - 用法： [程式檔名, 參數]
-      - 例如： `Command("dir", "/s")`
-    - Run
+      - 例如： `os.Exec.Command("dir", "/s")`
+    - `Run(程式檔名)`
       - 程式會等待至執行完成。
-    - Start
+    - `Start(程式檔名)`
       - 程式**不會**等待至執行完成。
   - math
-    - 亂數產生： Rand
+    - 亂數產生： `Rand`
       - Seed(種子)
-        - `Seed(time.Now().Unix())`
+        - `math.Rand.Seed(time.Now().Unix())`
       - Intn
         - max = 欲最大值；min = 欲最小值
-        - `Intn(max - min) + min`
-    - 根號： Sqrt
+        - `math.Rand.Intn(max - min) + min`
+    - 根號： `Sqrt(數字)`
   - time
-    - Now()
-      - Unix() (時間戳)
-    - Sleep()
+    - `Now()`
+      - `Unix()` (時間戳)
+    - `Sleep()`
       - `Sleep(second * time.Second)`
-    - time.Second
-    - time.Minute
-    - time.Hour
+    - `time.Second`
+    - `time.Minute`
+    - `time.Hour`
   - flag
-    - flag.[Type]()
+    - `flag.[Type]()`
       - [Type] 可以是 int, string, float32, float64, bool 等等
-    - flag.[Type]var()
-    - flag.Parse()
+    - `flag.[Type]Var()`
+    - `flag.Parse()`
     - 使用方法可參閱 Golang 補充資料。
-  - panic() (程式結束)
+  - `panic()` (程式結束)
   - func
     - `func (函數名稱) (輸入) (輸出) {}`
   - for
@@ -105,7 +105,6 @@
             fmt.Println("a == 2")
       }
       ```
-    - 
 - 非函數
   - 類型
     - string
