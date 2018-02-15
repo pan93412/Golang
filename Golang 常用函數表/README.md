@@ -32,11 +32,12 @@
     - `Chdir()`
     - `Mkdir()`
   - 刪除、更名操作
-    - `Remove()`
+    - `Remove()`：
       僅移除檔案
-    - `RemoveAll()`
+    - `RemoveAll()`：
       移除目錄下所有檔案
-    - `Rename()`
+    - `Rename()`：
+      更名、移動檔案
   - 檔案資訊
     - `Stat()`
       - 用法： `檔案資訊, err := os.Stat(檔案)`
