@@ -26,6 +26,8 @@
   - `Println()`
   - `Printf()`
 - os
+  - `Exit([返回代號])`
+    - 範例： `os.Exit(0)`
   - 資料夾
     - `Chdir()`
     - `Mkdir()`
