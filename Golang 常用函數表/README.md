@@ -50,8 +50,10 @@
       - 例如： `os.Exec.Command("dir", "/s")`
     - `Run(程式檔名)`
       - 程式會等待至執行完成。
+      - 會回傳 error。(`err := (變數).Run()`)
     - `Start(程式檔名)`
       - 程式**不會**等待至執行完成。
+      - 會回傳 error。(`err := (變數).Run()`)
   - math
     - 亂數產生： `Rand`
       - Seed(種子)
