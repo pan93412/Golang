@@ -189,6 +189,11 @@ func main() {
 ### runtime 的使用
 - `runtime.GOOS`: 判斷系統。
 - `runtime.GOARCH`: 判斷系統架構。
+### 輸入、輸出跟錯誤
+- `os.Stdout`：輸出
+- `os.Stdin`：輸入
+- `os.Stderr`：錯誤
+
 ## Authors
 作者： byStarTW
 
