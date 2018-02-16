@@ -185,6 +185,10 @@ func main() {
   // 結果： ["num1", "num2", "num3"]
 }
 ```
+
+### runtime 的使用
+- `runtime.GOOS`: 判斷系統。
+- `runtime.GOARCH`: 判斷系統架構。
 ## Authors
 作者： byStarTW
 
