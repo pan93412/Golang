@@ -327,14 +327,14 @@ import ("fmt"; "os"; "os/exec")
  **/
 func main() {
   // 開啟 grep，不等待 grep 執行完成
-  p := exec.Command("grep")
-  p.Start()
+  p := exec.Command("grep") // 設置 grep 指令
+  p.Start() // 執行
   // 清除畫面 (for Linux)
-  p = exec.Command("clear")
-  p.Stdout = os.Stdout
-  p.Run()
+  p = exec.Command("clear") // 設置 clear 指令
+  p.Stdout = os.Stdout // 把 clear 的輸出輸出至 os.Stdout 標準輸出
+  p.Run() // 執行
   // 關閉程式
-  os.Exit(0)
+  os.Exit(0) // 正常關閉
 }
 ```
 #### 輸入、輸出跟錯誤
