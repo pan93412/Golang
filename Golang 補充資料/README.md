@@ -337,10 +337,12 @@ func main() {
   os.Exit(0) // 正常關閉
 }
 ```
-#### 輸入、輸出跟錯誤
-- `os.Stdout`：輸出
-- `os.Stdin`：輸入
-- `os.Stderr`：錯誤
+#### 標準輸入、輸出跟錯誤
+- `os.Stdout`：標準輸出
+  - 例如 `fmt.Println("Hello")` 就是向 os.Stdout 發送 Hello。
+- `os.Stdin`：標準輸入
+  - 例如 `fmt.Scanln(&s1)` 就是向 os.Stdin 要求讀取使用者輸入的內容，然後儲存至 s1。
+- `os.Stderr`：標準錯誤
 ### bufio 的教學
 Reader 部分：
 ```
