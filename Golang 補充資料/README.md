@@ -172,7 +172,7 @@ func main() {
   fmt.Println(newText) // 結果： "yami_odymel is byStarTW's friend"
 }
 ```
-### Split
+#### Split
 - 使用方法： strings.Split(原文字常數/變數, 切割處)
 - 範例：
 ```
@@ -185,15 +185,229 @@ func main() {
   // 結果： ["num1", "num2", "num3"]
 }
 ```
-
 ### runtime 的使用
 - `runtime.GOOS`: 判斷系統。
 - `runtime.GOARCH`: 判斷系統架構。
-### 輸入、輸出跟錯誤
+### for 的兩個小函式
+- `continue`：跳過這一次迴圈
+  - 範例
+  ```
+  for i := 0; i < 4; i++ {
+    fmt.Println(i)
+    if i == 2 { continue }
+  }
+  ```
+  - 結果： 1, 3
+- `break`：停止迴圈
+  - 範例
+  ```
+  for i := 0; i < 4; i++ {
+    fmt.Println(i)
+    if i == 2 { break }
+  }
+  ```
+  - 結果： 1
+### os 的使用
+#### 說明
+```
+/**
+ * 這個使用教學會分三篇，分別是 「資料夾操作」、
+ * 「檔案操作」 跟 「檔案資訊」。
+ * 在看這篇文章之前，你可以看看前幾篇的 os.Stdout、
+ * os.Stdin、os.Stderr 分別代表什麼意思。
+ * 而在 「檔案操作」 這篇，我也會講關於
+ * os.O_CREATE, os.O_RDONLY 等等常用的檔案操作函數。
+ **/
+```
+#### os 資料夾操作
+```
+/**
+ * 教學： os 使用 - 資料夾操作
+
+ * 編撰者： byStarTW
+ * 如果代碼有任何錯誤，歡迎發 issues 或 PR！
+ **/
+package main
+import ("fmt"; "os")
+/**
+ * 資料夾操作的常用指令：
+ *  - os.Mkdir(資料夾名稱, UNIX 權限) [error]
+ *    稍微講一下 Unix 權限的寫法：
+ *    4- 讀取 / 2- 寫入 / 1- 執行
+ *    把你想要的權限數字加起來
+ *    假如我要讀取跟執行權限，那就是 5。寫入跟執行權限就是 3、讀取跟寫入權限就是 6、
+ *    所有權限就是 7。
+ *    然後 OOO 依序是擁有者；群組；所有使用者 （有點不太確定?）
+ *    如果是 Windows 系統你可以直接寫 0777
+ *  - os.RemoveAll (資料夾名稱)
+ *    os.Remove 用來移除檔案、os.RemoveAll 用來移除資料夾 （與其底下的所有檔案、資料夾）
+ *  - os.Stat(資料夾名稱) [FileInfo, error]
+ *    - Name() 資料夾名稱
+ *    - IsDir() 是否為資料夾 (回傳 true / false)
+ **/
+func main() {
+  os.Mkdir("My1stFolderWithGo") // 建立 My1stFolderWithGo 資料夾
+  Hi, _ := os.Stat("My1stFolderWithGo")
+  if Hi.Name() != "My1stFolderWithGo" {
+    // 假如這個資料夾的名稱不是 My1stFolderWithGo (?)
+    fmt.Println("哪裡出錯了... 他的名稱不是", Hi.Name())
+  }
+  if Hi.IsDir() != true {
+    // 假如這個資料夾不是個資料夾
+    fmt.Println("哪裡出錯了... 他不是個資料夾")
+  }
+  fmt.Println("資料夾名稱：", Hi.Name())
+}
+```
+#### os 檔案操作
+```
+/**
+ * 教學： os 使用 - 檔案操作
+ * 編撰者： byStarTW
+ * 如果代碼有任何錯誤，歡迎發 issues 或 PR！
+ **/
+package main
+import ("fmt"; "os")
+/**
+ * os 關於檔案操作的函式，我個人覺得已經足夠詳細。
+ * 那麼，開始囉！ :D
+ * - os.Open("檔案名稱") [檔案操作函式, err] 開啟檔案
+ * - os.Create("檔案名稱") [檔案操作函式, err] 新建檔案
+ * - os.OpenFile("檔案名稱", flag, UNIX 權限) [檔案操作函式, err] 以上兩個函式的 Easy 版
+ *   - 常用 flag
+ *     - os.O_CREATE 若檔案不存在，建立一個新資料夾
+ *     - os.O_TRUNC 如果檔案存在，清空檔案
+ *     - os.O_RDWR 賜予讀取、寫入權限
+ *     - os.O_RDONLY 僅賜予讀取權限
+ *     - os.O_WRONLY 僅賜予寫入權限
+ *   - 檔案操作函式
+ *     - Close() 關閉檔案
+ *     - Sync() 變更寫入檔案
+ *     - Stat() 用法同 os.Stat()
+ *     - 另外這個函式也可以直接用來讀取跟寫入。
+ *       (io.Reader / io.Writer)
+ * - os.Remove("檔案名稱") 移除檔案
+ * - os.Stat("檔案名稱") [StatInfo, err]
+ *   - Name() 檔案名稱
+ *   - Size() 檔案大小 (bytes)
+ **/
+func main() {
+  // 首先，我們先建立一個檔案
+  // [!] 假如你想要執行這個程式碼，請確保你的電腦
+  // 是否有 "My1stFileWithGo.txt"
+  TheFile, _ := os.OpenFile("My1stFileWithGo.txt", os.O_CREATE|os.O_RDWR|os.TRUNC, 777)
+  TheFile.Close() // 關閉檔案
+  Hi, _ := os.Stat("My1stFileWithGo.txt")
+  fmt.Println("檔案名稱：", Hi.Name(), "\n檔案大小：", Hi.Size(), " bytes")
+  os.Remove("My1stFileWithGo.txt")
+}
+```
+#### os 補充
+```
+/**
+ * 教學： os 使用 - 補充
+ * 編撰者： byStarTW
+ * 如果代碼有任何錯誤，歡迎發 issues 或 PR！
+ **/
+package main
+import ("fmt"; "os"; "os/exec")
+/**
+ * os 的補充
+ * 這一篇會講關於 Exec 執行檔案、
+ * os.Exit() 關閉程序等函式。
+ *
+ * - Exec 執行檔案 （使用前 import "os/exec"）
+ *   - exec.Command("程式名稱", "flag 1", "flag 2", ...) [Command 參數]
+ *     - Run() 開啟並等待程式執行完成
+ *     - Start() 開啟但不等待程式執行完成
+ *     - Command 參數.Stdout = os.Stdout 把程式輸出轉移到標準輸出 (os.Stdout)
+ * - os.Exit(程式離開代碼 int)
+ *   - 通常 os.Exit(0) 是正常結束，os.Exit(-1) 是程式錯誤
+ *   - 假如這個錯誤嚴重，你可以把 os.Exit() 換成 panic()
+ **/
+func main() {
+  // 開啟 grep，不等待 grep 執行完成
+  p := exec.Command("grep")
+  p.Start()
+  // 清除畫面 (for Linux)
+  p = exec.Command("clear")
+  p.Stdout = os.Stdout
+  p.Run()
+  // 關閉程式
+  os.Exit(0)
+}
+```
+#### 輸入、輸出跟錯誤
 - `os.Stdout`：輸出
 - `os.Stdin`：輸入
 - `os.Stderr`：錯誤
+### bufio 的教學
+Reader 部分：
+```
+/**
+ * 教學： bufio [READER]
+ * 適用對象： Golang 基礎者
+ **/
+package main
+import ("bufio"; "os"; "fmt")
 
+/**
+ * 關於 Reader 類別：
+ * 讀取一個來源資料、然後輸出一個資料。
+ * Reader 常用的類別有：
+ * bufio.NewReader(Source) [Reader] 讀取來源資料指令
+ * bufio.NewReaderSize(bufio.NewReader(Source), Size) 設定來源資料的緩衝區大小
+ * Reader.ReadString(charset) 以一個 charset (e.g '\n'、'\t')
+ * 分割一個字串，假如寫 Reader.ReadString('\n')，遇到 \n 就會
+ * 自己截斷。
+ * 若截斷的文字後面還有文字，可以再使用一次這個指令，
+ * 把後面的內容讀取出來。
+ * Reader.Buffered() 目前緩衝區剩餘的內容數量 (int)
+ **/
+func main {
+  /** 第一種使用情況 **/
+  MyReader := bufio.NewReader(os.Stdin) // 讀取來源 os.Stdin 的內容
+  fmt.Println("輸入些什麼：")
+  // 注意！ ReadString 會輸出 [string, error]，若只需要
+  // 文字請自行指定。
+  mrStr, mrErr := MyReader.ReadString('\n') // 讀取 os.Stdin 直到那個 charset 的內容。
+  fmt.Printf("您輸出了 %v，錯誤為 %v。\n", mrStr, mrErr)
+  /** 第二種使用情況 **/
+  myFile := os.OpenFile("theText.txt", os.O_CREATE|os.RDWR, 666) // 開啟 theText.txt
+  MyReader = bufio.NewReader(myFile) // 讀取 theText.txt 的檔案
+  // 反覆的一直讀取資料，直到所有檔案讀取完畢為止。
+  for MyReader.Buffered() == 0 {
+    fmt.Println(MyReader.ReadString('\n'))
+  }  
+}
+```
+Writer 部分：
+```
+/**
+ * 教學： bufio [WRITER]
+ * 適用對象： Golang 基礎者
+ **/
+package main
+import ("bufio"; "os"; "fmt")
+
+/**
+ * 關於 Writer 類別：
+ * 建立一個欲寫入位置、寫入資料、並且把資料寫入原位置。
+ * Writer 常用的類別有：
+ * bufio.NewWriter(Source) [Writer] 設定寫入位置
+ * bufio.NewWriterSize(bufio.NewWriter(Source), Size) 設定緩衝區大小
+ * Writer.WriteString("字串") 寫入資料至寫入位置。
+ * Writer.Flush() 把緩衝區內容寫入 「寫入位置」
+ **/
+func main {
+  myFile := os.OpenFile("theText.txt", os.O_CREATE|os.RDWR, 666) // 開啟 theText.txt
+  MyWriter = bufio.NewWriter(myFile) // 指定 myFile 為寫入位置
+  MyWriter.WriteString("Hello! I am byStarTW") // 寫入字串 "Hello! I am byStarTW"
+  MyWriter.Flush() // 寫入
+  myFile.Sync() // 把 myFile 目前存在記憶體的檔案寫入實體硬碟內。
+  myFile.Close() // 關閉檔案
+}
+```
 ## Authors
 作者： byStarTW
 

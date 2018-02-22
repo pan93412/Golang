@@ -20,6 +20,17 @@
   - `Split()`
     - (原文字常數/變數), 切割處
     - 範例程式請參考 Golang 補充資料。
+- bufio
+  - Reader 類別
+    - `bufio.NewReader(讀取位置) [*reader]`
+      - `reader.ReadString('\n') ([string, err])`：讀取至 '\n' 結束 （中繼符號）。
+      - `reader.Buffered()`：目前的緩衝區資料數。
+    - `bufio.NewReaderSize(讀取位置, 緩衝區大小) [*reader]`
+  - Writer 類別
+    - `bufio.NewWriter(載入位置) [*writer]`
+      - `writer.WriteString("文字")`：寫入 "文字" 到載入位置
+      - `writer.Flush()`：將文字從緩衝區寫入檔案。
+    - `bufio.NewWriterSize(讀取位置, 緩衝區大小) [*writer]`
 - log
   - 與 fmt 比較： log 會在文字前端增加時間。
   - `Print()`
@@ -31,6 +42,24 @@
   - 資料夾
     - `Chdir()`
     - `Mkdir()`
+  - 檔案操作
+    - `os.OpenFile(檔名, 開啟方式, 權限) [*file, err]`
+      - `file.Sync()`：將變更寫入檔案
+      - `file.Close()`：關閉
+    - `os.Open(檔名) [*file, err]`
+      - 使用方法同 `os.OpenFile()`
+    - `os.Create(檔名) [*file, err]`
+      - 使用方法同 `os.OpenFile()`
+    - `os.O_CREATE`：若資料夾不存在，建立一個相同之檔案。
+    - `os.O_RDWR`：賜予讀寫權限
+    - `os.O_RDONLY`：只賜予讀取權限
+    - `os.O_WRONLY`：只賜予寫入權限
+    - `os.O_TRUNC`：裁短檔案長度為 0
+      - 可使用 os.Stat 等工具來解決這個問題：
+        ```
+        if os.Stat("filepath").Size() != 0 { os.Remove("filepath) }
+        os.OpenFile("filepath", os.O_CREATE|os.O_RDWR, 666)
+        ```
   - 刪除、更名操作
     - `Remove()`：
       僅移除檔案
@@ -42,9 +71,13 @@
     - `Stat()`
       - 用法： `檔案資訊, err := os.Stat(檔案)`
         - `檔案資訊.IsDir()`
-        - 該物件是不是資料夾？
-          不是就是檔案，
-          可使用 true / false 判斷。
+          - 該物件是不是資料夾？
+            不是就是檔案，
+            可使用 true / false 判斷。
+        - `檔案資訊.Name() [string]`
+          - 這個檔案的名稱。
+        - `檔案資訊.Size() [int64]`
+          - 檔案大小 (格式： bytes)。
   - 檔案執行： `exec`
     - Command
       - 用法： [程式檔名, 參數]
