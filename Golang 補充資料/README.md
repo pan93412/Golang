@@ -241,6 +241,8 @@ import ("fmt"; "os")
  *    如果是 Windows 系統你可以直接寫 0777
  *  - os.RemoveAll (資料夾名稱)
  *    os.Remove 用來移除檔案、os.RemoveAll 用來移除資料夾 （與其底下的所有檔案、資料夾）
+ *  - os.Chdir("資料夾名稱")
+ *    切換目錄到 (資料夾名稱)，功能就是 Terminal 底下的 cd。
  *  - os.Stat(資料夾名稱) [FileInfo, error]
  *    - Name() 資料夾名稱
  *    - IsDir() 是否為資料夾 (回傳 true / false)
