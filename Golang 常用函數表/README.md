@@ -43,6 +43,9 @@
     - `Chdir()`
     - `Mkdir()`
   - 檔案操作
+    - `os.Chmod("檔名", UNIX 權限 int) error`
+      - 用於更改 UNIX 下檔案的權限。
+      - 示例： `os.Chmod("/etc/hosts", 0744)`
     - `os.OpenFile(檔名, 開啟方式, 權限) [*file, err]`
       - `file.Sync()`：將變更寫入檔案
       - `file.Close()`：關閉
